@@ -16,7 +16,7 @@ TLS_KEY = CERTS_DIR / "localhost.key"
 # Timing knobs, generous enough for loaded CI machines.
 STALL_SECONDS = 0.4
 DRIP_INTERVAL_SECONDS = 0.05
-DRIP_BYTES = 10
+DRIP_BYTES = 20
 SLOW_REDIRECT_SECONDS = 0.35
 SLOW_REDIRECT_HOPS = 5
 # One more than the client's default redirect limit of 10.

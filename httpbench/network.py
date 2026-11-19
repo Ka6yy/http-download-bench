@@ -536,6 +536,12 @@ class HttpClient:
             # read1() does not flag a fixed-length body that ends early, so
             # stop once Content-Length is satisfied and validate below.
             if expected is not None and received >= expected:
+                # On Python 3.10 read1() does not reset http.client's state
+                # to idle once a fixed-length body is fully read (read()
+                # does), so the next request on the same connection would
+                # fail with ResponseNotReady. read(0) completes the response
+                # on every version and is a no-op on the fixed ones.
+                response.read(0)
                 break
 
         finished = last_byte_at if last_byte_at is not None else time.perf_counter()
